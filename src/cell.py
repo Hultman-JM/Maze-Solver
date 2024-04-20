@@ -10,9 +10,8 @@ class Cell:
         self.top_right_point = None
         self.bot_left_point = None
         self.bot_right_point = None
-
         self.center_point = None
-
+        self.visited = False
         self.win = window
 
     def draw(self, x1, y1, x2, y2):
@@ -26,15 +25,30 @@ class Cell:
         if self.has_left_wall:
             left_wall = Line(self.top_left_point, self.bot_left_point)
             self.win.draw_line(left_wall)
+        else:
+            left_wall = Line(self.top_left_point, self.bot_left_point)
+            self.win.draw_line(left_wall, "white")
+
         if self.has_top_wall:
             top_wall = Line(self.top_left_point, self.top_right_point)
             self.win.draw_line(top_wall)
+        else:
+            top_wall = Line(self.top_left_point, self.top_right_point)
+            self.win.draw_line(top_wall, "white")    
+        
         if self.has_right_wall:
             right_wall = Line(self.top_right_point, self.bot_right_point)
             self.win.draw_line(right_wall)
+        else:
+            top_wall = Line(self.top_right_point, self.bot_right_point)
+            self.win.draw_line(top_wall, "white")
+
         if self.has_bottom_wall:
             bot_wall = Line(self.bot_left_point ,self.bot_right_point)
             self.win.draw_line(bot_wall)
+        else:
+            bot_wall = Line(self.bot_left_point ,self.bot_right_point)
+            self.win.draw_line(bot_wall, "white")
 
     def draw_move(self, to_cell, undo = False):
         half_length1 = abs(self.top_right_point.x - self.top_left_point.x) // 2
